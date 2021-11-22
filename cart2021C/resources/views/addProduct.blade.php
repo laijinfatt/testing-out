@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
                 <label for="productImage">Product Image</label>
-                <input type="text" class="form-control" id="productImage"
+                <input type="image" class="form-control" id="productImage"
                 name="productImage">
             </div>
             <div class="form-group">
