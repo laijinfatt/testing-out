@@ -6,7 +6,7 @@
         <br><br>
         <h3>Create New Product</h3>
         <form action="{{route('addProduct')}}" method="POST" enctype="multipart/form-data">
-        @csrf
+        @CSRF
             <div class="form-group">
                 <label for="productName">Product Name</label>
                 <input type="text" class="form-control" id="productName"
@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 <label for="productQuantity">Product Quantity</label>
-                <input type="text" class="form-control" id="productQuantity"
+                <input type="number" class="form-control" id="productQuantity"
                 name="productQuantity">
             </div>
             <div class="form-group">
@@ -29,11 +29,11 @@
             </div>
             <div class="form-group">
                 <label for="productImage">Product Image</label>
-                <input type="image" class="form-control" id="productImage"
+                <input type="file" class="form-control" id="productImage"
                 name="productImage">
             </div>
             <div class="form-group">
-                <label for="catID">Category</label>
+                <label for="CategoryID">Category</label>
                 <input type="text" class="form-control" id="CategoryID"
                 name="CategoryID">
             </div>
