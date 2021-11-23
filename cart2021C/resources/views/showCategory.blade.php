@@ -1,0 +1,28 @@
+@extends('layout')
+@section('content')
+<div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+        <br><br>
+        <table class="table table-bordered">
+            <thread>
+                <tr>
+                    <td>ID</td>
+                    <td>Category Name</td>
+                    <td>Action</td>
+                </tr>
+            </thread>
+            <tbody>
+                @foreach($categories as $category)
+                <tr>
+                    <td>{{$category->id}}</td>
+                    <td>{{$category->name}}</td>
+                    <td></td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <br><br>
+    </div>
+</div>
+@endsection
