@@ -28,4 +28,13 @@ class ProductController extends Controller
         $viewProduct=Product::all();
         return view('showProduct')->with('products',$viewProduct);
     }
+
+    public function index(){
+        $viewProduct=DB::table('products')
+        ->leftJoin('categories','products.CategoryID','=','categories.id')
+        ->select('products.*','categories.name as cName')
+        ->get();
+        
+        return view('showProduct')->with('products',$viewProduct);
+    }
 }
