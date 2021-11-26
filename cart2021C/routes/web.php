@@ -22,7 +22,7 @@ Route::get('/addCategory', function () {
 });
 
 Route::get('/addProduct', function () {
-    return view('addProduct');
+    return view('addProduct',['categoryID'=>App\Models\Category::all()]);
 });
 
 Route::post('/addCategory/store',[App\Http\Controllers\CategoryController::class,'add'])->name('addCategory');
@@ -32,6 +32,8 @@ Route::post('/addProduct/store',[App\Http\Controllers\ProductController::class,'
 Route::get('/showCategory',[App\Http\Controllers\CategoryController::class,'view'])->name('showCategory');
 
 Route::get('/showProduct',[App\Http\Controllers\ProductController::class,'index'])->name('showProduct');
+
+Route::get('/deleteProduct/{id}',[App\Http\Controllers\ProductController::class,'delete'])->name('deleteProduct');
 
 Auth::routes();
 

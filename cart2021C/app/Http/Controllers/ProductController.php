@@ -25,7 +25,7 @@ class ProductController extends Controller
         Session::flash('success',"Product create successfully");
         return redirect()->route('showProduct');
     }
-    
+
     public function view(){
         $viewProduct=Product::all();
         return view('showProduct')->with('products',$viewProduct);
@@ -38,5 +38,13 @@ class ProductController extends Controller
         ->get();
         
         return view('showProduct')->with('products',$viewProduct);
+    }
+
+    public function delete($id){
+
+        $deleteProduct=Product::find($id);
+        $deleteProduct->delete();
+        Session::flash('success',"Product was deleted successfully!");
+        return redirect()->route('showProduct');
     }
 }

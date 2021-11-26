@@ -27,6 +27,7 @@
                     <td>{{$product->price}}</td>
                     <td><img src="{{ asset('image/' . $product->image)}}" width="100" class="img-fluid" alt=""/></td>
                     <td>{{$product->cName}}</td>
+                    <td><a href="" class="btn btn-warning btn-xs">Edit</a> <a href="{{ route('deleteProduct',['id'=>$product->id])}}" class="btn btn-danger btn-xs" onClick="return confirm('Are you sure to delete?')">Delete</a></td>
                 </tr>
                 @endforeach
             </tbody>
