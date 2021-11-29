@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models\Product;
 use Session;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -46,5 +47,33 @@ class ProductController extends Controller
         $deleteProduct->delete();
         Session::flash('success',"Product was deleted successfully!");
         return redirect()->route('showProduct');
+    }
+
+    public function edit($id){
+
+        $products=Product::all()->where('id',$id);
+        
+        return view('editProduct')->with('products',$products)
+        ->with('categoryID',Category::all());
+    }
+
+    public function update(){
+
+        $r=request();
+        $products=Product::find($r->productID);
+
+        if($r->file('productImage')!=''){
+            $image=$r->file('productImage');
+            $image->move('image',$image->getClientOriginalName());
+            $imageName=$image->getClientOriginalName();
+            $products->image=$imageName;
+        }
+
+        $products->name=$r->productName;
+        $products->description=$r->productDescription;
+        $products->quantity=$r->productQuantity;
+        $products->price=$r->productPrice;
+        $products->CategoryID=$r->CategoryID;
+        $products->save();
     }
 }
