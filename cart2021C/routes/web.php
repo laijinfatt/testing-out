@@ -50,6 +50,9 @@ Route::get('/deleteCart/{id}',[App\Http\Controllers\CartController::class,'delet
 
 Route::post('\checkout', [App\Http\Controllers\PaymentController::class, 'paymentPost'])->name('payment.post');
 
+Route::get('/viewProduct',[App\Http\Controllers\ProductController::class,'viewProduct'])->
+name('viewProduct');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
