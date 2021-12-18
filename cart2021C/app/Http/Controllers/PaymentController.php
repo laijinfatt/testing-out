@@ -8,10 +8,13 @@ use Stripe;
 
 class PaymentController extends Controller
 {
-    public function paymentPost(Request $request)
+    
+
+     public function paymentPost(Request $request)
     {
 	       
-	Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe\Stripe::setApiKey(env('STRIPE_KEY'));
         Stripe\Charge::create ([
                 "amount" => $request->sub*100,
                 "currency" => "MYR",
