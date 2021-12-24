@@ -53,6 +53,8 @@ Route::post('\checkout', [App\Http\Controllers\PaymentController::class, 'paymen
 Route::get('/viewProduct',[App\Http\Controllers\ProductController::class,'viewProduct'])->
 name('viewProduct');
 
+Route::get('/myOrder',[App\Http\Controllers\PaymentController::class, 'viewOrder'])->name('myOrder');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
