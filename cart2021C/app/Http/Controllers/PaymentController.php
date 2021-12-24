@@ -14,7 +14,7 @@ class PaymentController extends Controller
     {
 	       
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-        Stripe\Stripe::setApiKey(env('STRIPE_KEY'));
+        //Stripe\Stripe::setApiKey(env('STRIPE_KEY'));
         Stripe\Charge::create ([
                 "amount" => $request->sub*100,
                 "currency" => "MYR",
