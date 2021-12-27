@@ -32,7 +32,8 @@ class CartController extends Controller
         ->select('my_carts.quantity as cartQTY','my_carts.id as cid','products.*')
         ->where('my_carts.orderID','=','')// '' means haven't make payment
         ->where('my_carts.userID','=',Auth::id())
-        ->get();
+        //->get();
+        ->paginate(5); //5 = 5 items in one page
 
         return view('myCart')->with('carts',$carts);
     }
