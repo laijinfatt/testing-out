@@ -58,6 +58,8 @@ name('search.product');
 
 Route::get('/myOrder',[App\Http\Controllers\PaymentController::class, 'viewOrder'])->name('myOrder');
 
+Route::get('/pdfReport',[App\Http\Controllers\PDFController::class,'pdfReport'])->name('pdfReport');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

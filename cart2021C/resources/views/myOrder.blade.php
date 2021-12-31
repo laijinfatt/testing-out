@@ -23,6 +23,7 @@
             </tbody>
         </table>
         <br><br>
+        <a href="{{route('pdfReport')}}" class="btn btn-info btn-xs">Download Report</a>
     </div>
 </div>
 
