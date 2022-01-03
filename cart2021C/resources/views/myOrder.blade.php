@@ -24,6 +24,7 @@
         </table>
         <br><br>
         <a href="{{route('pdfReport')}}" class="btn btn-info btn-xs">Download Report</a>
+        <div class="col-sm-2"></div>
     </div>
 </div>
 
