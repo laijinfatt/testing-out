@@ -97,4 +97,22 @@ class ProductController extends Controller
 
         return view('viewProduct')->with('products',$products);
     }
+
+    public function viewPhone(){
+        $products=DB::table('products')
+        ->leftJoin('categories','products.CategoryID','=','categories.id')
+        ->select('products.*','categories.name as cName')->where('categories.name','=','Phone')
+        ->get();
+
+        return view('viewProduct')->with('products',$products);
+    }
+
+    public function viewComputer(){
+        $products=DB::table('products')
+        ->leftJoin('categories','products.CategoryID','=','categories.id')
+        ->select('products.*','categories.name as cName')->where('categories.name','=','Computer')
+        ->get();
+
+        return view('viewProduct')->with('products',$products);
+    }
 }

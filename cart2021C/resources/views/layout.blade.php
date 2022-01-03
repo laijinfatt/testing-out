@@ -1,3 +1,7 @@
+<?php
+use App\Models\Product;
+$cartCount = Product::cartCount();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -29,15 +33,15 @@
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Products</a>
+        <a class="nav-link" href="{{route('viewProduct')}}">Products</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Category
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Phone</a>
-          <a class="dropdown-item" href="#">Desktops/Laptop</a>
+          <a class="dropdown-item" href="{{route('phone.viewProduct')}}">Phone</a>
+          <a class="dropdown-item" href="{{route('computer.viewProduct')}}">Desktops/Laptop</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Computer Hardware</a>
         </div>
@@ -48,9 +52,18 @@
       <input class="form-control mr-sm-2" name="keyword" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>&nbsp;
-    <button type="button" class="btn btn-success">
-      My Cart <span class="badge bg-danger">1</span>
+    @guest
+    <button type="button" class="btn btn-success" onclick="window.location.href='{{route('show.my.cart')}}'">
+      My Cart 
     </button>
+    @else
+    <button type="button" class="btn btn-success" onclick="window.location.href='{{route('show.my.cart')}}'">
+      My Cart 
+      <span class="badge bg-danger">
+        ({{$cartCount}})
+      </span>
+    </button>
+    @endguest
   </div>
 </nav>
 
