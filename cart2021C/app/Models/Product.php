@@ -27,7 +27,7 @@ class Product extends Model
         ->where('my_carts.orderID','=','')//'' means haven't make payment
         ->where('my_carts.userID','=',Auth::id())//item match with current user logined
         ->groupBy('my_carts.userID')
-        ->get();
+        ->first();
 
         return $noItem;
     }
