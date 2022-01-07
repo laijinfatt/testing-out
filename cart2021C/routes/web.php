@@ -25,20 +25,24 @@ Route::get('/addProduct', function () {
     return view('addProduct',['categoryID'=>App\Models\Category::all()]);
 });
 
+Route::get('/addCategory',[App\Http\Controllers\CategoryController::class,'index'])->name('add.Category');
+
+Route::get('/addProduct',[App\Http\Controllers\ManageProductController::class,'index'])->name('add.Product');
+
 Route::post('/addCategory/store',[App\Http\Controllers\CategoryController::class,'add'])->name('addCategory');
 
-Route::post('/addProduct/store',[App\Http\Controllers\ProductController::class,'add'])->name('addProduct');
+Route::post('/addProduct/store',[App\Http\Controllers\ManageProductController::class,'add'])->name('addProduct');
 
 Route::get('/showCategory',[App\Http\Controllers\CategoryController::class,'view'])->name('showCategory');
 
-Route::get('/showProduct',[App\Http\Controllers\ProductController::class,'index'])->name('showProduct');
+Route::get('/showProduct',[App\Http\Controllers\ManageProductController::class,'index1'])->name('showProduct');
 
-Route::get('/deleteProduct/{id}',[App\Http\Controllers\ProductController::class,'delete'])->name('deleteProduct');
+Route::get('/deleteProduct/{id}',[App\Http\Controllers\ManageProductController::class,'delete'])->name('deleteProduct');
 
-Route::get('/editProduct/{id}',[App\Http\Controllers\ProductController::class,'edit'])->name('editProduct');
+Route::get('/editProduct/{id}',[App\Http\Controllers\ManageProductController::class,'edit'])->name('editProduct');
 // http://localhost/editProduct.php?id=     localhost/editProduct/22
 
-Route::post('/updateProduct',[App\Http\Controllers\ProductController::class,'update'])->name('updateProduct');
+Route::post('/updateProduct',[App\Http\Controllers\ManageProductController::class,'update'])->name('updateProduct');
 
 Route::get('/productDetail/{id}',[App\Http\Controllers\ProductController::class,'productdetail'])->name('product.detail');
 

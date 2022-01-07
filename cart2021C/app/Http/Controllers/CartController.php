@@ -35,6 +35,8 @@ class CartController extends Controller
         //->get();
         ->paginate(5); //5 = 5 items in one page
 
+        $this->cartItem();
+
         return view('myCart')->with('carts',$carts);
     }
 
@@ -44,5 +46,18 @@ class CartController extends Controller
         $deleteItem->delete(); //delete record
         Session::flash('success',"Item was removed successfully!");
         return redirect()->route('show.my.cart');
+    }
+
+    public function cartItem(){
+        $noItem=DB::table('my_carts')
+        ->leftjoin('products','products.id','=','my_carts.productID')
+        ->select(DB::raw('COUNT(*) as count_item'))
+        ->where('my_carts.orderID','=','')//'' means haven't make payment
+        ->where('my_carts.userID','=',Auth::id())//item match with current user logined
+        ->groupBy('my_carts.userID')
+        ->first();
+
+        $cartItem=$noItem->count_item;
+        Session()->put('cartItem',$cartItem);//assign value to session variable cartItem
     }
 }

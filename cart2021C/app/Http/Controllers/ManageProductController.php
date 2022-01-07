@@ -3,13 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
-use App\Models\Product;
 use Session;
+use App\Models\Product;
 use App\Models\Category;
+use DB;
+use Auth;
 
-class ProductController extends Controller
+class ManageProductController extends Controller
 {
+    public function __contruct(){
+        $this->middleware('auth');
+    }
+
+    public function index(){
+        return view('addProduct')->with('categoryID',Category::all());
+    }
+
     public function add(){
         $r=request();//received the data by GET or POST method $_POST['name']
         $image=$r->file('productImage');
@@ -32,7 +41,7 @@ class ProductController extends Controller
         return view('showProduct')->with('products',$viewProduct);
     }
 
-    public function index(){
+    public function index1(){
         $viewProduct=DB::table('products')
         ->leftJoin('categories','products.CategoryID','=','categories.id')
         ->select('products.*','categories.name as cName')
@@ -40,7 +49,7 @@ class ProductController extends Controller
         
         return view('showProduct')->with('products',$viewProduct);
     }
-
+    
     public function delete($id){
 
         $deleteProduct=Product::find($id);
@@ -76,45 +85,5 @@ class ProductController extends Controller
         $products->save();
 
         return redirect()->route('showProduct');
-    }
-
-    public function productdetail($id){
-        $products=Product::all()->where('id',$id);
-
-        return view('productDetail')->with('products',$products);
-    }
-
-    public function viewProduct(){
-        $products=Product::all();
-
-        (new CartController)->cartItem(); //call CartController function
-
-        return view('viewProduct')->with('products',$products);
-    }
-
-    public function searchProduct(){
-        $r=request();
-        $keyword=$r->keyword;
-        $products=DB::table('products')->where('name','like','%'.$keyword.'%')->get();
-
-        return view('viewProduct')->with('products',$products);
-    }
-
-    public function viewPhone(){
-        $products=DB::table('products')
-        ->leftJoin('categories','products.CategoryID','=','categories.id')
-        ->select('products.*','categories.name as cName')->where('categories.name','=','Phone')
-        ->get();
-
-        return view('viewProduct')->with('products',$products);
-    }
-
-    public function viewComputer(){
-        $products=DB::table('products')
-        ->leftJoin('categories','products.CategoryID','=','categories.id')
-        ->select('products.*','categories.name as cName')->where('categories.name','=','Computer')
-        ->get();
-
-        return view('viewProduct')->with('products',$products);
     }
 }
