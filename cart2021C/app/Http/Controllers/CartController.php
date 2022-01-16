@@ -49,15 +49,23 @@ class CartController extends Controller
     }
 
     public function cartItem(){
-        $noItem=DB::table('my_carts')
-        ->leftjoin('products','products.id','=','my_carts.productID')
-        ->select(DB::raw('COUNT(*) as count_item'))
-        ->where('my_carts.orderID','=','')//'' means haven't make payment
-        ->where('my_carts.userID','=',Auth::id())//item match with current user logined
-        ->groupBy('my_carts.userID')
-        ->first();
-
-        $cartItem=$noItem->count_item;
+        if(Auth::id()!=""){
+            $noItem=DB::table('my_carts')
+            ->leftjoin('products','products.id','=','my_carts.productID')
+            ->select(DB::raw('COUNT(*) as count_item'))
+            ->where('my_carts.orderID','=','')//'' means haven't make payment
+            ->where('my_carts.userID','=',Auth::id())//item match with current user logined
+            ->groupBy('my_carts.userID')
+            ->first();
+        }
+        
+        if($noItem==""){ 
+            $cartItem='0';
+        }
+        else{
+            $cartItem=$noItem->count_item;
+        }
         Session()->put('cartItem',$cartItem);//assign value to session variable cartItem
+        
     }
 }

@@ -70,6 +70,16 @@ name('phone.viewProduct');
 Route::get('/computer',[App\Http\Controllers\ProductController::class,'viewComputer'])->
 name('computer.viewProduct');
 
+//user protected route
+Route::group(['middleware'=>['auth','user'],'prefix'=>'user'],function(){
+    Route::get('/viewProduct',[App\Http\Controllers\ProductController::class,'viewProduct'])->
+name('viewProduct');
+});
+
+//admin protected route
+Route::group(['middleware'=>['auth','admin'],'prefix'=>'admin'],function(){
+    Route::get('/showProduct',[App\Http\Controllers\ManageProductController::class,'index1'])->name('showProduct');
+});
 
 
 Auth::routes();
